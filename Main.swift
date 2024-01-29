@@ -42,7 +42,10 @@ commandEncoder?.setBuffer(array1, offset: 0, index: 0)
 commandEncoder?.setBuffer(array2, offset: 0, index: 1)
 commandEncoder?.setBuffer(result, offset: 0, index: 2)
 
+
 print("Beginning computation (GPU)")
+
+
 var start = CFAbsoluteTimeGetCurrent()
 
 let threadsPerGrid = MTLSize(width: nbElements, height: 1, depth: 1)
@@ -62,13 +65,17 @@ for i in (0..<5) {
 var elapsed = CFAbsoluteTimeGetCurrent() - start
 print("Elapsed with metal: \(elapsed) with \(nbElements) elements")
 print("")
+
+
 print("Beginning computation (CPU)")
+
+
 start = CFAbsoluteTimeGetCurrent()
 
 var res: [Float] = []
 for i in (0..<nbElements) {
     res.append(a1[i] + a2[i])
 }
-
 elapsed = CFAbsoluteTimeGetCurrent() - start
+
 print("Elapsed with CPU: \(elapsed) with \(nbElements) elements")
